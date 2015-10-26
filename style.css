@@ -1,0 +1,112 @@
+
+body{
+    background-color: #F4F4F4;
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif;
+    color: #666;
+	
+	}
+	* {
+    margin: 0;
+    padding: 0;
+}
+.r{
+float:right;
+}
+.lt-dlg-box{
+     position: absolute;
+    
+    
+    
+    z-index: 102;
+    background-color: #FFFFFF;
+    
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    box-shadow: rgba(0, 0, 0, 0.498039) 0px 5px 15px;
+}
+.lt-title{
+
+    min-height: 16.43px;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+        cursor: move;
+        -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+}
+.lt-content{
+    position: relative;
+    padding: 15px;
+}
+
+
+.resize {
+  position: absolute;
+  font-size: 0.1px;
+  display: block;
+  -ms-touch-action: none;
+  touch-action: none;
+  z-index: 90;
+
+  
+}
+
+.resize-n {
+  cursor: n-resize;
+  height: 7px;
+  width: 100%;
+  top: -5px;
+  left: 0;
+}
+.resize-s {
+  cursor: s-resize;
+  height: 7px;
+  width: 100%;
+  bottom: -5px;
+  left: 0;
+}
+.resize-e {
+  cursor: e-resize;
+  width: 7px;
+  right: -5px;
+  top: 0;
+  height: 100%;
+}
+.resize-w {
+  cursor: w-resize;
+  width: 7px;
+  left: -5px;
+  top: 0;
+  height: 100%;
+}
+.resize-se {
+  cursor: se-resize;
+  width: 12px;
+  height: 12px;
+  right: -5px;
+  bottom: -5px;
+}
+.resize-sw {
+  cursor: sw-resize;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  bottom: -5px;
+}
+.resize-nw {
+  cursor: nw-resize;
+  width: 9px;
+  height: 9px;
+  left: -5px;
+  top: -5px;
+}
+.resize-ne {
+  cursor: ne-resize;
+  width: 9px;
+  height: 9px;
+  right: -5px;
+  top: -5px;
+}
