@@ -2,6 +2,56 @@
 /*对话框*/
 
 var zindex = 10000;
+var docMouseMoveEvent = document.onmousemove; 
+    var docMouseUpEvent = document.onmouseup; 
+
+
+function resize(obj,jd){
+    var evt = getEvent(); 
+      var resizeX = evt.clientX;
+      var resizeY = evt.clientY;
+      var mWidth = obj.width();
+      var mHeight = obj.height();
+      var mLeft = obj.position().left;
+      var mTop = obj.position().top;
+      document.onmousemove = function() { 
+        var evt = getEvent(); 
+        var tmp  = resizeY - evt.clientY;
+        var tmp1 = resizeX - evt.clientX;
+        var tmp2 = resizeY - evt.clientY;
+        if(jd=="n"){
+            obj.height(mHeight + tmp);
+            obj.css("top",(mTop-tmp)+"px");
+        }else if(jd=="s"){
+            obj.height(mHeight - tmp);
+        }else if(jd=="e"){
+            obj.width(mWidth - tmp1);
+        }else if(jd=="w"){
+            obj.width(mWidth + tmp1);
+            obj.css("left",(mLeft-tmp1)+"px");
+        }else if(jd=="nw"){
+            obj.width(mWidth + tmp1);
+            obj.height(mHeight + tmp2);
+            obj.css("left",(mLeft-tmp1)+"px");
+            obj.css("top",(mTop-tmp2)+"px");
+        }else if(jd=="ne"){
+            obj.width(mWidth - tmp1);
+            obj.height(mHeight + tmp2);
+            obj.css("top",(mTop-tmp2)+"px");
+        }else if(jd=="sw"){
+            obj.width(mWidth + tmp1);
+            obj.height(mHeight - tmp2);
+            obj.css("left",(mLeft-tmp1)+"px");
+        }else if(jd=="se"){
+            obj.width(mWidth - tmp1);
+            obj.height(mHeight - tmp2);;
+        }
+      };
+      document.onmouseup = function () {  
+        document.onmousemove = docMouseMoveEvent; 
+        document.onmouseup = docMouseUpEvent; 
+      };
+}
 
 function CreateWindows(title, msg, w, h){  
    
@@ -40,175 +90,68 @@ function CreateWindows(title, msg, w, h){
     var moveTop = 0; 
     var moveLeft = 0; 
     var moveable = false; 
-    var docMouseMoveEvent = document.onmousemove; 
-    var docMouseUpEvent = document.onmouseup; 
+    
 
     //顶部拉伸
     resize_n.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeY = evt.clientY;
-      var mHeight = msgObj.height();
-      var mTop = msgObj.position().top;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp = resizeY - evt.clientY;
-        msgObj.height(mHeight + tmp);
-        msgObj.css("top",(mTop-tmp)+"px");
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"n");
     });
     //底部拉伸
     resize_s.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeY = evt.clientY;
-      var mHeight = msgObj.height();
-      //var mTop = msgObj.position().top;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp = evt.clientY - resizeY;
-        msgObj.height(mHeight + tmp);
-        //msgObj.css("top",(mTop-tmp)+"px");
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"s");
     });
     //右边拉伸
     resize_e.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeX = evt.clientX;
-      var mWidth = msgObj.width();
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp = resizeX - evt.clientX;
-        msgObj.width(mWidth - tmp);
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"e");
     });
     //左边拉伸
     resize_w.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeX = evt.clientX;
-      var mWidth = msgObj.width();
-      var mLeft = msgObj.position().left;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp = resizeX - evt.clientX;
-        msgObj.width(mWidth + tmp);
-        msgObj.css("left",(mLeft-tmp)+"px");
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
-    }); 
-
+      resize(msgObj,"w");
+    });
     //左上角拉伸
     resize_nw.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeX = evt.clientX;
-      var resizeY = evt.clientY;
-      var mWidth = msgObj.width();
-      var mHeight = msgObj.height();
-      var mLeft = msgObj.position().left;
-      var mTop = msgObj.position().top;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp1 = resizeX - evt.clientX;
-        var tmp2 = resizeY - evt.clientY;
-        msgObj.width(mWidth + tmp1);
-        msgObj.height(mHeight + tmp2);
-        msgObj.css("left",(mLeft-tmp1)+"px");
-        msgObj.css("top",(mTop-tmp2)+"px");
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"nw");
     }); 
     //右上角拉伸
     resize_ne.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeX = evt.clientX;
-      var resizeY = evt.clientY;
-      var mWidth = msgObj.width();
-      var mHeight = msgObj.height();
-      var mLeft = msgObj.position().left;
-      var mTop = msgObj.position().top;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp1 = resizeX - evt.clientX;
-        var tmp2 = resizeY - evt.clientY;
-        msgObj.width(mWidth - tmp1);
-        msgObj.height(mHeight + tmp2);
-        msgObj.css("top",(mTop-tmp2)+"px");
-      
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"ne");
     }); 
     //左下角拉伸
     resize_sw.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeX = evt.clientX;
-      var resizeY = evt.clientY;
-      var mWidth = msgObj.width();
-      var mHeight = msgObj.height();
-      var mLeft = msgObj.position().left;
-      var mTop = msgObj.position().top;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp1 = resizeX - evt.clientX;
-        var tmp2 = resizeY - evt.clientY;
-        msgObj.width(mWidth + tmp1);
-        msgObj.height(mHeight - tmp2);
-        msgObj.css("left",(mLeft-tmp1)+"px");
-        
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"sw");
     }); 
     //右下角拉伸
     resize_se.mousedown(function(){
-      var evt = getEvent(); 
-      var resizeX = evt.clientX;
-      var resizeY = evt.clientY;
-      var mWidth = msgObj.width();
-      var mHeight = msgObj.height();
-      var mLeft = msgObj.position().left;
-      var mTop = msgObj.position().top;
-      document.onmousemove = function() { 
-        var evt = getEvent(); 
-        var tmp1 = resizeX - evt.clientX;
-        var tmp2 = resizeY - evt.clientY;
-        msgObj.width(mWidth - tmp1);
-        msgObj.height(mHeight - tmp2);;
-      };
-      document.onmouseup = function () {  
-        document.onmousemove = docMouseMoveEvent; 
-        document.onmouseup = docMouseUpEvent; 
-      };
+      resize(msgObj,"se");
     }); 
-
-
-
-    
 
     msgObj.mousedown(function(){
       msgObj.css("z-index",zindex++);
     })
-  
+    Title.dblclick(function(){
+        if(msgObj.attr("data")=="1"){
+            
+
+
+            msgObj.css("left",msgObj.attr("iLeft"));
+            msgObj.css("top",msgObj.attr("iTop"));
+            msgObj.width(msgObj.attr("iWidth"));
+            msgObj.height(msgObj.attr("iHeight"));
+            msgObj.attr("data",0);
+        }else{
+            msgObj.attr("iLeft",msgObj.css("left"));
+            msgObj.attr("iTop",msgObj.css("top"));
+            msgObj.attr("iWidth",msgObj.width());
+            msgObj.attr("iHeight",msgObj.height());
+
+
+            msgObj.css("left","10px");
+            msgObj.css("top","10px");
+            msgObj.width($iWidth-20);
+            msgObj.height($iHeight-20);
+            msgObj.attr("data",1);
+        }
+    })
     Title.mousedown(function() { 
         var evt = getEvent(); 
         moveable = true;  
@@ -222,7 +165,7 @@ function CreateWindows(title, msg, w, h){
                 var evt = getEvent(); 
                 var x = moveLeft + evt.clientX - moveX; 
                 var y = moveTop + evt.clientY - moveY; 
-                if ( x > 0 &&( x + w < $iWidth) && y > 0 && (y + h < $iHeight) ) { 
+                if ( x > 0 &&( x + msgObj.width() < $iWidth) && y > 0 && (y + msgObj.height() < $iHeight) ) { 
                     msgObj.css("left",x + "px") ; 
                     msgObj.css("top" ,y + "px");
                 } 
@@ -258,7 +201,7 @@ function CreateWindows(title, msg, w, h){
 
 
 
-    var msgBox = $('<div class="lt-content">'+msg+'</div>'); 
+    var msgBox = $('<div class="lt-content"><div class="l"><a href="#"><img class="ty" src="http://www.ddota.com/avatar/045442360e55fed837abb6bfba6d5993-c.jpg"></a></div><div class="lt-div"><div class="r"><span>下午 4:51</span></div><div><strong class="lt-name"><a href="#">Krabs James</a></strong><div>111</div></div></div></div>'); 
     msgObj.append(msgBox);
      
     
